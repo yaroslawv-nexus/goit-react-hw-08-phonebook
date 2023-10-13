@@ -8,14 +8,17 @@ export const Filter = () => {
   const dispatch = useDispatch();
 
   return (
-    <label>
-      <LabelSearchStyle>Find contacts by name</LabelSearchStyle>
-      <InputSearchStyle
-        type="text"
-        name="filter"
-        onChange={e => dispatch(changeFilter(e.target.value))}
-        value={filter}
-      />
-    </label>
+    <>
+      <h2>Contacts</h2>
+      <label>
+        <LabelSearchStyle>Find contacts by name</LabelSearchStyle>
+        <InputSearchStyle
+          type="text"
+          name="filter"
+          onChange={e => dispatch(changeFilter(e.target.value))}
+          value={filter}
+        />
+      </label>
+    </>
   );
 };
