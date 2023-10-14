@@ -1,11 +1,17 @@
 import React from 'react';
 import { UserDiv } from './UserNav.styled';
+import { logOut } from 'redux/auth/operations';
+import { useAuth } from 'hooks/useAuth';
+import { useDispatch } from 'react-redux';
 
 const UserNav = () => {
+  const dispatch = useDispatch();
+  const { name } = useAuth();
+
   return (
     <UserDiv>
-      <p>mango@mail.com</p>
-      <button>Logout</button>
+      <p>{name}</p>
+      <button onClick={() => dispatch(logOut())}>Logout</button>
     </UserDiv>
   );
 };

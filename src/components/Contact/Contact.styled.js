@@ -24,8 +24,11 @@ p {
   width: 100px;
 }
 
-button {
-     background-color: #f44336;
+
+`
+
+export const DeleteButton = styled.button`
+ background-color: #f44336;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -34,6 +37,17 @@ button {
   font-size: 14px;
   
   transition: background-color 0.3s ease;
-}
-
 `
+
+export const EditButton = styled.button`
+ background-color: rgba(0, 128, 0, 0.8);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  
+  transition: background-color 0.3s ease;
+`
+

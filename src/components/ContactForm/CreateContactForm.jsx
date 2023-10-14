@@ -10,15 +10,15 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
-import { addContact } from 'redux/asyncRedax';
+import { addContact } from 'redux/contacts/operations';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Enter your name'),
-  phone: Yup.string()
-    .matches(/^\+380\d{9}$/, 'Invalid phone number format (+380XXXXXXXXX)')
+  number: Yup.string()
+    .matches(/^\d{3}-\d{2}-\d{2}$/, 'Invalid phone number format (xxx-xx-xx)')
     .required('Enter a phone number'),
 });
 
@@ -44,11 +44,12 @@ export const CreateContactForm = () => {
     <Formik
       initialValues={{
         name: '',
-        phone: '',
+        number: '',
       }}
       validationSchema={SignupSchema}
-      onSubmit={values => {
+      onSubmit={(values, { resetForm }) => {
         addContactPrev(values);
+        resetForm();
       }}
     >
       <FormStyle>
@@ -58,9 +59,9 @@ export const CreateContactForm = () => {
         </label>
         <ErrorMess name="name" component="span" />
         <label>
-          Number <FieldInputStyle name="phone" type="tel" />
+          Number <FieldInputStyle name="number" type="tel" />
         </label>
-        <ErrorMess name="phone" component="span" />
+        <ErrorMess name="number" component="span" />
         <FieldSubmitStyle type="submit">Add Contact</FieldSubmitStyle>
       </FormStyle>
     </Formik>
