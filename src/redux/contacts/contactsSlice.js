@@ -50,8 +50,10 @@ const slice = createSlice({
       state.error = null;
       state.contactsList = state.contactsList.map(element => {
         if (element.id === id) {
-          element = { name, number }
-        }
+          return { name, number };
+        } 
+        return element;
+        
       });
     },
     

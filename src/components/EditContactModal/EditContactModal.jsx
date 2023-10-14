@@ -5,7 +5,7 @@ import { closeModal } from 'redux/modalSlice';
 import { selectContacts, selectModal, selectModalId } from 'redux/selectors';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { ErrorMessage, Form, Field } from 'formik';
+
 import {
   ErrorMess,
   FieldInputStyle,
