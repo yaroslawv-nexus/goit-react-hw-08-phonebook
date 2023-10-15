@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from 'redux/modalSlice';
-import { selectContacts, selectModal, selectModalId } from 'redux/selectors';
+import { selectModal, selectModalId } from 'redux/selectors';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -40,20 +40,17 @@ const SignupSchema = Yup.object().shape({
 const EditContactModal = () => {
   const modalIsOpen = useSelector(selectModal);
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
+  // const contacts = useSelector(selectContacts);
   const contactID = useSelector(selectModalId);
 
-  function checkDuplicate(contact) {
-    return contacts.some(
-      element => contact.name.toLowerCase() === element.name.toLowerCase()
-    );
-  }
+  // function checkDuplicate(contact) {
+  //   return contacts.some(
+  //     element => contact.name.toLowerCase() === element.name.toLowerCase()
+  //   );
+  // }
 
   const onSubmit = contact => {
-    if (checkDuplicate(contact)) {
-      alert('the contact already exists');
-      return;
-    }
+    console.log(contactID);
     dispatch(editContact({ contactID, contact }));
   };
 
@@ -72,8 +69,10 @@ const EditContactModal = () => {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values, { resetForm }) => {
-            onSubmit(values);
+            const { name, number } = values;
+            onSubmit({ name, number });
             resetForm();
+            dispatch(closeModal());
           }}
         >
           <FormStyle>

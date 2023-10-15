@@ -47,10 +47,10 @@ const slice = createSlice({
       [editContact.fulfilled](state, action) {
         const { id, name, number } = action.payload; 
       state.isLoading = false;
-      state.error = null;
+        state.error = null;
       state.contactsList = state.contactsList.map(element => {
         if (element.id === id) {
-          return { name, number };
+          return { id, name, number };
         } 
         return element;
         
