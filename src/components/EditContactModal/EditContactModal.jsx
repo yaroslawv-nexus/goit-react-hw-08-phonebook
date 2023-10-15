@@ -2,16 +2,24 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from 'redux/modalSlice';
-import { selectModal, selectModalId } from 'redux/selectors';
+import {
+  selectModal,
+  selectModalId,
+  selectModalName,
+  selectModalNumber,
+} from 'redux/selectors';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import CloseIcon from '@mui/icons-material/Close';
+// import IconButton from '@mui/material/IconButton';
 
 import {
   ErrorMess,
   FieldInputStyle,
   FieldSubmitStyle,
   FormStyle,
-} from 'components/ContactForm/CreateContactForm.styled';
+  IconCloseStyle,
+} from 'components/EditContactModal/EditContactModal.styled';
 import { editContact } from 'redux/contacts/operations';
 
 Modal.setAppElement('#root');
@@ -40,14 +48,12 @@ const SignupSchema = Yup.object().shape({
 const EditContactModal = () => {
   const modalIsOpen = useSelector(selectModal);
   const dispatch = useDispatch();
-  // const contacts = useSelector(selectContacts);
   const contactID = useSelector(selectModalId);
-
-  // function checkDuplicate(contact) {
-  //   return contacts.some(
-  //     element => contact.name.toLowerCase() === element.name.toLowerCase()
-  //   );
-  // }
+  const contactName = useSelector(selectModalName);
+  const contactNum = useSelector(selectModalNumber);
+  // console.log(contactID);
+  // console.log(contactName);
+  // console.log(contactNum);
 
   const onSubmit = contact => {
     console.log(contactID);
@@ -64,8 +70,8 @@ const EditContactModal = () => {
       >
         <Formik
           initialValues={{
-            name: '',
-            number: '',
+            name: contactName,
+            number: contactNum,
           }}
           validationSchema={SignupSchema}
           onSubmit={(values, { resetForm }) => {
@@ -87,7 +93,13 @@ const EditContactModal = () => {
             <FieldSubmitStyle type="submit">Edit Contact</FieldSubmitStyle>
           </FormStyle>
         </Formik>
-        <button onClick={() => dispatch(closeModal())}>Close</button>
+        <IconCloseStyle
+          aria-label="close"
+          size="15"
+          onClick={() => dispatch(closeModal())}
+        >
+          <CloseIcon />
+        </IconCloseStyle>
       </Modal>
     </div>
   );

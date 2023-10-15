@@ -13,16 +13,16 @@ export const Contact = ({ contact }) => {
       <Button
         variant="contained"
         onClick={e => {
-          dispatch(openModal(e.target.id));
+          dispatch(openModal({ contact }));
         }}
-        id={contact.id}
+        // id={contact.id}
       >
         Edit
       </Button>
       <Button
         variant="contained"
-        onClick={e => dispatch(deleteContact(e.target.id))}
-        id={contact.id}
+        onClick={e => dispatch(deleteContact(contact.id))}
+        // id={contact.id}
       >
         Delete
       </Button>
