@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectIsLogIn, selectUserName } from "redux/auth/selectors";
+import { selectIsLogIn, selectIsRefresh, selectUserName } from "redux/auth/selectors";
 
 
 
@@ -8,7 +8,7 @@ import { selectIsLogIn, selectUserName } from "redux/auth/selectors";
 export const useAuth = () => {
     const isLogIn = useSelector(selectIsLogIn);
     const name = useSelector(selectUserName);
+    const isRefresh = useSelector(selectIsRefresh);
 
-
-    return { isLogIn, name };
+    return { isLogIn, name, isRefresh };
 }

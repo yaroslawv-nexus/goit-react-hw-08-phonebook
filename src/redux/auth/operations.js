@@ -15,7 +15,6 @@ const clearBearer = () => {
 export const register = createAsyncThunk("auth/register", async (user, thunkAPI) => {
   try {
       const response = await axios.post("/users/signup", user);
-      console.log(response);
       setBearer(response.data.token);
       
   return response.data;
@@ -41,6 +40,22 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
       await axios.post("/users/logout");
       clearBearer();
+  }
+  catch (e) {
+    return thunkAPI.rejectWithValue(e.message);
+  }
+});
+
+export const refreshUser = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
+    const { token } = thunkAPI.getState().auth;
+    console.log(token);
+    if (!token) {
+       return thunkAPI.rejectWithValue("No valid token");
+    }
+    setBearer(token);
+  try {
+  const response = await axios.get("/users/current");
+  return response.data;
   }
   catch (e) {
     return thunkAPI.rejectWithValue(e.message);
