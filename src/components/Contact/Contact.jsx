@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
-import { ContactItemStyle, DeleteButton, EditButton } from './Contact.styled';
+import { ContactItemStyle } from './Contact.styled';
 import { deleteContact } from 'redux/contacts/operations';
 import { openModal } from 'redux/modalSlice';
+import Button from '@mui/material/Button';
 
 export const Contact = ({ contact }) => {
   const dispatch = useDispatch();
@@ -9,20 +10,22 @@ export const Contact = ({ contact }) => {
   return (
     <ContactItemStyle>
       <h3>{contact.name}</h3> <p>{contact.number}</p>
-      <EditButton
+      <Button
+        variant="contained"
         onClick={e => {
           dispatch(openModal(e.target.id));
         }}
         id={contact.id}
       >
         Edit
-      </EditButton>
-      <DeleteButton
+      </Button>
+      <Button
+        variant="contained"
         onClick={e => dispatch(deleteContact(e.target.id))}
         id={contact.id}
       >
         Delete
-      </DeleteButton>
+      </Button>
     </ContactItemStyle>
   );
 };

@@ -8,7 +8,7 @@ const Navigation = () => {
 
   return (
     <NavigStyled>
-      <Link>Home</Link>
+      <Link to={'/'}>Home</Link>
       {isLogIn && <Link to={`/contacts`}>Contacts</Link>}
     </NavigStyled>
   );

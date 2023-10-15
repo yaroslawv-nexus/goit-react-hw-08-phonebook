@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { refreshUser } from 'redux/auth/operations';
 import RestrictedRoute from './RestrictedRoute';
 import PrivateRoute from './PrivateRoute';
+import Home from './Home/Home';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export const App = () => {
     !isRefresh && (
       <Routes>
         <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Home />} />
           <Route
             path="contacts"
             element={
